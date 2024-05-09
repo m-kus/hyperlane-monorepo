@@ -16,14 +16,10 @@ use hyperlane_base::{
         Settings,
     },
 };
-use hyperlane_core::{cfg_unwrap_all, config::*, HyperlaneDomain, U256};
+use hyperlane_core::{cfg_unwrap_all, config::*, HyperlaneDomain, U256, MatchingList};
 use itertools::Itertools;
 use serde::Deserialize;
 use serde_json::Value;
-
-use crate::settings::matching_list::MatchingList;
-
-pub mod matching_list;
 
 /// Settings for `Relayer`
 #[derive(Debug, AsRef, AsMut, Deref, DerefMut)]

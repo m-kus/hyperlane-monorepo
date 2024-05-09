@@ -14,6 +14,7 @@ pub use checkpoint::*;
 pub use log_metadata::*;
 pub use merkle_tree::*;
 pub use message::*;
+pub use matching_list::*;
 
 use crate::{Decode, Encode, HyperlaneProtocolError, Sequenced};
 
@@ -26,6 +27,7 @@ mod log_metadata;
 mod merkle_tree;
 mod message;
 mod serialize;
+mod matching_list;
 
 /// Unified 32-byte identifier with convenience tooling for handling
 /// 20-byte ids (e.g ethereum addresses)

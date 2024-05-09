@@ -16,7 +16,7 @@ use hyperlane_base::{
 };
 use hyperlane_core::{
     HyperlaneDomain, HyperlaneMessage, InterchainGasPayment, MerkleTreeInsertion, MpmcChannel,
-    MpmcReceiver, U256,
+    MpmcReceiver, U256, MatchingList,
 };
 use tokio::{
     sync::{
@@ -38,7 +38,7 @@ use crate::{
         serial_submitter::{SerialSubmitter, SerialSubmitterMetrics},
     },
     server::{self as relayer_server, MessageRetryRequest},
-    settings::{matching_list::MatchingList, RelayerSettings},
+    settings::RelayerSettings,
 };
 use crate::{
     merkle_tree::processor::{MerkleTreeProcessor, MerkleTreeProcessorMetrics},

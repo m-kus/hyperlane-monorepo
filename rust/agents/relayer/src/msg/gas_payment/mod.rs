@@ -5,7 +5,7 @@ use eyre::Result;
 use hyperlane_base::db::HyperlaneRocksDB;
 use hyperlane_core::{
     FixedPointNumber, GasPaymentKey, HyperlaneMessage, InterchainGasExpenditure,
-    InterchainGasPayment, TxCostEstimate, TxOutcome, U256,
+    InterchainGasPayment, TxCostEstimate, TxOutcome, U256, MatchingList,
 };
 use tracing::{debug, error, trace};
 
@@ -13,7 +13,7 @@ use self::policies::{GasPaymentPolicyMinimum, GasPaymentPolicyNone};
 use crate::{
     msg::gas_payment::policies::GasPaymentPolicyOnChainFeeQuoting,
     settings::{
-        matching_list::MatchingList, GasPaymentEnforcementConf, GasPaymentEnforcementPolicy,
+        GasPaymentEnforcementConf, GasPaymentEnforcementPolicy,
     },
 };
 
@@ -149,12 +149,12 @@ mod test {
     use hyperlane_base::db::{test_utils, HyperlaneRocksDB};
     use hyperlane_core::{
         HyperlaneDomain, HyperlaneMessage, InterchainGasPayment, LogMeta, TxCostEstimate, H160,
-        H256, U256,
+        H256, U256, MatchingList,
     };
 
     use super::GasPaymentEnforcer;
     use crate::settings::{
-        matching_list::MatchingList, GasPaymentEnforcementConf, GasPaymentEnforcementPolicy,
+        GasPaymentEnforcementConf, GasPaymentEnforcementPolicy,
     };
 
     #[tokio::test]

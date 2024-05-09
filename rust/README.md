@@ -196,3 +196,9 @@ We use the tokio async runtime environment. Please see the docs
   - interfaces to the fuel contracts
 - `agents`
   - each of the off-chain agents implemented thus far
+- `hyperlane-cli`
+  - depends on hyperlane-core and hyperlane-ethereum
+  - cli for managing the mailbox contract
+
+### Using CLI
+

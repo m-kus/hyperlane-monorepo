@@ -60,7 +60,7 @@ pub fn generate_bindings_for_dir(
     writeln!(mod_file, "#![allow(clippy::all)]").unwrap();
     write!(mod_file, "#![allow(missing_docs)]\n\n").unwrap();
     for m in modules {
-        writeln!(mod_file, "pub(crate) mod {};", m).expect("failed to write to modfile");
+        writeln!(mod_file, "pub mod {};", m).expect("failed to write to modfile");
     }
     drop(mod_file);
 }
