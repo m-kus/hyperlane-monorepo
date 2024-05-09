@@ -8,7 +8,7 @@ use std::collections::HashMap;
 use ethers::abi::FunctionExt;
 use ethers::prelude::{abi, Lazy, Middleware};
 
-pub use self::{config::*, contracts::*, ism::*, rpc_clients::*, signer::*};
+pub use self::{config::*, contracts::*, ism::*, rpc_clients::*, signer::*, interfaces::*};
 
 mod tx;
 

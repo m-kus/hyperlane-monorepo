@@ -1,0 +1,29 @@
+cargo-features = ["workspace-inheritance"]
+
+[package]
+name = "hyperlane-cli"
+documentation.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license-file.workspace = true
+publish.workspace = true
+version.workspace = true
+
+[dependencies]
+async-trait.workspace = true
+clap = { workspace = true, features = ["derive"] }
+tokio.workspace = true
+thiserror.workspace = true
+ethers.workspace = true
+serde.workspace = true
+url = { workspace = true, features = ["serde"] }
+fixed-hash.workspace = true
+tracing.workspace = true
+tracing-subscriber = { workspace = true, features = ["env-filter", "fmt"] }
+serde_json.workspace = true
+hex.workspace = true
+prompts.workspace = true
+
+# Hyperlane
+hyperlane-core = { path = "../hyperlane-core" }
+hyperlane-ethereum = { path = "../chains/hyperlane-ethereum" }

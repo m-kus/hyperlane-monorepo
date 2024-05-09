@@ -9,13 +9,13 @@ use async_trait::async_trait;
 use derive_new::new;
 use eyre::Result;
 use hyperlane_base::{db::HyperlaneRocksDB, CoreMetrics};
-use hyperlane_core::{HyperlaneDomain, HyperlaneMessage};
+use hyperlane_core::{HyperlaneDomain, HyperlaneMessage, MatchingList};
 use prometheus::IntGauge;
 use tokio::sync::mpsc::UnboundedSender;
 use tracing::{debug, trace};
 
 use super::{metadata::AppContextClassifier, op_queue::QueueOperation, pending_message::*};
-use crate::{processor::ProcessorExt, settings::matching_list::MatchingList};
+use crate::processor::ProcessorExt;
 
 /// Finds unprocessed messages from an origin and submits then through a channel
 /// for to the appropriate destination.

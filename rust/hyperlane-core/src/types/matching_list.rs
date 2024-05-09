@@ -7,12 +7,12 @@ use std::{
     fmt::{Debug, Display, Formatter},
     marker::PhantomData,
 };
-
-use hyperlane_core::{config::StrOrInt, utils::hex_or_base58_to_h256, HyperlaneMessage, H256};
 use serde::{
     de::{Error, SeqAccess, Visitor},
     Deserialize, Deserializer,
 };
+
+use crate::{config::StrOrInt, utils::hex_or_base58_to_h256, HyperlaneMessage, H256};
 
 /// Defines a set of patterns for determining if a message should or should not
 /// be relayed. This is useful for determine if a message matches a given set or
@@ -23,11 +23,14 @@ use serde::{
 /// - single value in decimal or hex (must start with `0x`) format
 /// - list of values in decimal or hex format
 #[derive(Debug, Default, Clone)]
-pub struct MatchingList(Option<Vec<ListElement>>);
+pub struct MatchingList(pub Option<Vec<ListElement>>);
 
+/// Matching rule for a single field
 #[derive(Debug, Clone, PartialEq)]
-enum Filter<T> {
+pub enum Filter<T> {
+    /// Any value accepted
     Wildcard,
+    /// Accepted any of the listed options
     Enumerated(Vec<T>),
 }
 
@@ -220,17 +223,22 @@ impl<'de> Deserialize<'de> for Filter<H256> {
     }
 }
 
+/// Composition of matching rules for filtering Hyperlane messages
 #[derive(Debug, Deserialize, Clone)]
 #[serde(tag = "type")]
-struct ListElement {
+pub struct ListElement {
+    /// Sender domain filter
     #[serde(default, rename = "origindomain")]
-    origin_domain: Filter<u32>,
+    pub origin_domain: Filter<u32>,
+    /// Sender address filter
     #[serde(default, rename = "senderaddress")]
-    sender_address: Filter<H256>,
+    pub sender_address: Filter<H256>,
+    /// Recipient domain filter
     #[serde(default, rename = "destinationdomain")]
-    destination_domain: Filter<u32>,
+    pub destination_domain: Filter<u32>,
+    /// Recipient address filter
     #[serde(default, rename = "recipientaddress")]
-    recipient_address: Filter<H256>,
+    pub recipient_address: Filter<H256>,
 }
 
 impl Display for ListElement {
@@ -280,6 +288,16 @@ impl MatchingList {
         } else {
             default
         }
+    }
+
+    /// Return the number of matching rules.
+    pub fn len(&self) -> usize {
+        self.0.as_ref().map(|rules| rules.len()).unwrap_or(0)
+    }
+
+    /// Return the first element of the list or None if it's empty.
+    pub fn first(&self) -> Option<&ListElement> {
+        self.0.as_ref().map(|list| list.first()).unwrap_or(None)
     }
 }
 

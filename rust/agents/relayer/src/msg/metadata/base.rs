@@ -14,7 +14,6 @@ use crate::{
         AggregationIsmMetadataBuilder, CcipReadIsmMetadataBuilder, NullMetadataBuilder,
         RoutingIsmMetadataBuilder,
     },
-    settings::matching_list::MatchingList,
 };
 use async_trait::async_trait;
 use derive_new::new;
@@ -27,7 +26,7 @@ use hyperlane_base::{
 use hyperlane_core::{
     accumulator::merkle::Proof, AggregationIsm, CcipReadIsm, Checkpoint, HyperlaneDomain,
     HyperlaneMessage, InterchainSecurityModule, Mailbox, ModuleType, MultisigIsm, RoutingIsm,
-    ValidatorAnnounce, H160, H256,
+    ValidatorAnnounce, H160, H256, MatchingList,
 };
 
 use tokio::sync::RwLock;
